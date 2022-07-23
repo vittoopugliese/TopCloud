@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonService } from './../common.service';
 
 @Component({
@@ -8,26 +8,37 @@ import { CommonService } from './../common.service';
 })
 export class SoundbarComponent implements OnInit {
   constructor(public common: CommonService) {}
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  // @ViewChild('progress', { static: false }) progress: ElementRef;
 
-  }
   selectedTrack = this.common.selectedTrack;
-  progressTime = 0
+  progressTime = 0;
+  trackDuration = 100;
 
-  updateProgress(progressTime){
-    this.common.updateCurrentTime(progressTime)
+  updateProgress(progressTime) {
+    let times = this.common.updateCurrentTime(progressTime);
+    this.trackDuration = times.duration;
+    this.progressTime = times.current;
   }
 
-  trackDuration = 100
-  getMaxValue(){
-  this.trackDuration = this.common.getMaxValue()
+  convertTime() {
+    let time = Math.trunc(this.common.audio.currentTime)
+    let min = Math.floor(time / 60);
+    let sec = time % 60;
+
+    min = min < 10 ? 0 + min : min;
+    sec = sec < 10 ? 0 + sec : sec;
+
+    let convertedTime = min + ":" + sec;
+    return convertedTime;
   }
 
-  volume = localStorage.getItem('volume')
+
+
+  volume = localStorage.getItem('volume');
   inputtedVol(value) {
-    this.common.onVolChange(value)
-    localStorage.setItem('volume', value)
+    this.common.onVolChange(value);
+    localStorage.setItem('volume', value);
   }
-
 }

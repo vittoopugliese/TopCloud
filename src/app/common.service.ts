@@ -30,23 +30,22 @@ export class CommonService implements OnInit {
   }
 
   audio = new Audio();
-  progressBar
+
   playTrack() {
-    this.progressBar = 0
     this.audio.src = this.selectedTrack.src;
     this.audio.load();
     this.audio.play();
-
+    this.audio.volume = parseInt(localStorage.getItem('volume'))
     localStorage.setItem('track', JSON.stringify(this.selectedTrack));
   }
 
-  updateCurrentTime(clickedTime:number) {
-    this.audio.currentTime = clickedTime
-    return this.audio.currentTime;
-  }
-
-  getMaxValue(){
-    return this.audio.duration
+  updateCurrentTime(clickedTime: number) {
+    this.audio.currentTime = clickedTime;
+    let times = {
+      current: this.audio.currentTime,
+      duration: this.audio.duration,
+    };
+    return times;
   }
 
   getSavedLocalTrack() {
