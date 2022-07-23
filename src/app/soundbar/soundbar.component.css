@@ -1,0 +1,75 @@
+.reproductor-container {
+  display: flex;
+  width: 100vw;
+  height: 82px;
+  margin: 0px auto;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 200;
+  padding: 5px 10px;
+  background-image: linear-gradient(to top, rgb(191, 191, 191) 0%, white 80%);
+  border-top: 1px solid rgb(191, 191, 191);
+  box-shadow: 54px 0px 54px rgb(0 0 0 / 24%);
+  user-select: none;
+  transition: all 0.3s;
+}
+.reproductor {
+  position: relative;
+  display: flex;
+  width: 90%;
+  max-width: 1285px;
+  margin: 0px auto;
+}
+.songPic {
+  display: flex;
+  width: 74px;
+  height: 74px;
+  position: relative;
+  top: 4px;
+  right: 15px;
+  border-radius: 10px;
+}
+.songName {
+  font-size: 21px;
+  position: absolute;
+  bottom: 20px;
+  left: 70px;
+  word-wrap: break-word;
+  font-weight: 500;
+}
+.time{
+  display: flex;
+  justify-content: center;
+  position: relative;
+  right: 3px;
+  top: 18px;
+}
+.time h4{
+  font-weight: 400;
+}
+.separator {
+  position: relative;
+  bottom: 0px;
+}
+.volumeRange {
+  width: 124px;
+  position: absolute;
+  bottom: 20px;
+  right: -5px;
+  transform: scale(0.94);
+  transition: all 0.25s;
+  cursor: pointer;
+  accent-color: rgb(74, 74, 74);
+}
+.progressBar {
+  width: 90%;
+  position: absolute;
+  bottom: 5px;
+  left: 70px;
+  margin: 0px auto;
+  transition: all 0.25s;
+  cursor: pointer;
+  accent-color: rgb(74, 74, 74);
+  z-index: 1000;
+}

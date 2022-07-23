@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  scroll-behavior: smooth;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Rubik", sans-serif;
+  overflow-x: hidden;
+  font-weight: 500;
+  width: 100vw;
+  height: 100vh;
+  margin: 0px;
+  /* background: linear-gradient(220.55deg, #eaeaea 0%, #8b8b8b 100%); */
+}
+a {
+  text-decoration: none !important;
+  color: black;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+}
+*::selection{
+  background-color: grey;
+  color: white;
+}
