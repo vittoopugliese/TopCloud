@@ -7,8 +7,8 @@ import { CommonService } from './../common.service';
   styleUrls: ['./soundbar.component.css'],
 })
 export class SoundbarComponent implements OnInit {
-  constructor(public common: CommonService) {}
-  ngOnInit(): void {}
+  constructor(public common: CommonService) { }
+  ngOnInit(): void { }
 
   // @ViewChild('progress', { static: false }) progress: ElementRef;
 
@@ -23,15 +23,26 @@ export class SoundbarComponent implements OnInit {
   }
 
   convertTime() {
-    let time = Math.trunc(this.common.audio.currentTime)
+    let time = Math.round(this.common.audio.currentTime)
     let min = Math.floor(time / 60);
     let sec = time % 60;
 
-    min = min < 10 ? 0 + min : min;
-    sec = sec < 10 ? 0 + sec : sec;
+    if (min < 10 && sec < 10) {
+      let convertedTime = "0" + min + ":" + "0" + sec;
+      return convertedTime
+    } else if (min < 10) {
+      let convertedTime = "0" + min + ":" + sec;
+      return convertedTime
+    }
 
-    let convertedTime = min + ":" + sec;
-    return convertedTime;
+    if (min >= 10 && sec < 10) {
+      let convertedTime = min + ":" + "0" + sec;
+      return convertedTime
+    } else if (min >= 10) {
+      let convertedTime = min + ":" + sec;
+      return convertedTime
+    }
+    // working!!
   }
 
 

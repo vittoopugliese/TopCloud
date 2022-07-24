@@ -40,11 +40,11 @@ export class CommonService implements OnInit {
   }
 
   updateCurrentTime(clickedTime: number) {
-    this.audio.currentTime = clickedTime;
     let times = {
       current: this.audio.currentTime,
       duration: this.audio.duration,
     };
+    this.audio.currentTime = clickedTime;
     return times;
   }
 
