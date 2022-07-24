@@ -8,7 +8,8 @@ import { CommonService } from './../common.service';
 })
 export class SoundbarComponent implements OnInit {
   constructor(public common: CommonService) { }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   // @ViewChild('progress', { static: false }) progress: ElementRef;
 
@@ -45,9 +46,7 @@ export class SoundbarComponent implements OnInit {
     // working!!
   }
 
-
-
-  volume = localStorage.getItem('volume');
+  volume = 0.2
   inputtedVol(value) {
     this.common.onVolChange(value);
     localStorage.setItem('volume', value);

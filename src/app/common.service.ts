@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonService implements OnInit {
   constructor(private http: HttpClient) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.onVolChange()
+  }
 
   tracksUrl =
     'https://raw.githubusercontent.com/vittoopugliese/public-imgs/main/objects.json';
@@ -36,7 +38,6 @@ export class CommonService implements OnInit {
     this.audio.load();
     this.audio.play();
     this.audio.volume = parseInt(localStorage.getItem('volume'))
-    localStorage.setItem('track', JSON.stringify(this.selectedTrack));
   }
 
   updateCurrentTime(clickedTime: number) {
@@ -53,8 +54,9 @@ export class CommonService implements OnInit {
     this.trackDetails(saved.title, saved.duration, saved.image, saved.src);
   }
 
-  onVolChange(value: number) {
+  onVolChange(value?: number) {
     this.audio.volume = value;
+    localStorage.setItem('track', JSON.stringify(this.selectedTrack));
   }
   pauseTrack() {
     this.audio.pause();
