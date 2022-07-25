@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonService } from './../common.service';
 
 @Component({
@@ -6,12 +6,9 @@ import { CommonService } from './../common.service';
   templateUrl: './soundbar.component.html',
   styleUrls: ['./soundbar.component.css'],
 })
-export class SoundbarComponent implements OnInit {
-  constructor(public common: CommonService) { }
-  ngOnInit(): void {
-  }
-
-  // @ViewChild('progress', { static: false }) progress: ElementRef;
+export class SoundbarComponent implements OnInit, AfterViewInit {
+  constructor(public common: CommonService) {}
+  ngOnInit(): void {}
 
   selectedTrack = this.common.selectedTrack;
   progressTime = 0;
@@ -24,31 +21,39 @@ export class SoundbarComponent implements OnInit {
   }
 
   convertTime() {
-    let time = Math.round(this.common.audio.currentTime)
+    let time = Math.round(this.common.audio.currentTime);
     let min = Math.floor(time / 60);
     let sec = time % 60;
 
     if (min < 10 && sec < 10) {
-      let convertedTime = "0" + min + ":" + "0" + sec;
-      return convertedTime
+      let convertedTime = '0' + min + ':' + '0' + sec;
+      return convertedTime;
     } else if (min < 10) {
-      let convertedTime = "0" + min + ":" + sec;
-      return convertedTime
+      let convertedTime = '0' + min + ':' + sec;
+      return convertedTime;
     }
 
     if (min >= 10 && sec < 10) {
-      let convertedTime = min + ":" + "0" + sec;
-      return convertedTime
+      let convertedTime = min + ':' + '0' + sec;
+      return convertedTime;
     } else if (min >= 10) {
-      let convertedTime = min + ":" + sec;
-      return convertedTime
+      let convertedTime = min + ':' + sec;
+      return convertedTime;
     }
     // working!!
   }
 
-  volume = 0.2
-  inputtedVol(value) {
-    this.common.onVolChange(value);
-    localStorage.setItem('volume', value);
+  volume;
+  inputtedVol() {
+    this.common.onVolChange(this.volume);
+    localStorage.setItem('volume', this.volume);
+    console.log('saved', this.volume)
+  }
+
+  ngAfterViewInit() {
+    let savedVolume = parseInt(localStorage.getItem('volume'))
+    this.common.onVolChange(savedVolume)
+    this.volume = savedVolume
+    console.log('getted', savedVolume)
   }
 }

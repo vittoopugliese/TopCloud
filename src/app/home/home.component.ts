@@ -30,9 +30,7 @@ export class HomeComponent implements OnInit {
     let duration = this.tracks[index].duration;
     let track = this.tracks[index].src;
     this.common.trackDetails(title, duration, image, track);
-  }
-
-  playTrack(){
     this.common.playTrack()
   }
+
 }

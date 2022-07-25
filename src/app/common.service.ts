@@ -6,9 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonService implements OnInit {
   constructor(private http: HttpClient) {}
-  ngOnInit(): void {
-    this.onVolChange()
-  }
+  ngOnInit(): void {}
 
   tracksUrl =
     'https://raw.githubusercontent.com/vittoopugliese/public-imgs/main/objects.json';
@@ -32,12 +30,20 @@ export class CommonService implements OnInit {
   }
 
   audio = new Audio();
-
   playTrack() {
     this.audio.src = this.selectedTrack.src;
     this.audio.load();
     this.audio.play();
-    this.audio.volume = parseInt(localStorage.getItem('volume'))
+    localStorage.setItem('track', JSON.stringify(this.selectedTrack));
+  }
+  getSavedLocalTrack() {
+    let savedTrack = JSON.parse(localStorage.getItem('track'));
+    this.trackDetails(
+      savedTrack.title,
+      savedTrack.duration,
+      savedTrack.image,
+      savedTrack.src
+    );
   }
 
   updateCurrentTime(clickedTime: number) {
@@ -49,16 +55,15 @@ export class CommonService implements OnInit {
     return times;
   }
 
-  getSavedLocalTrack() {
-    let saved = JSON.parse(localStorage.getItem('track'));
-    this.trackDetails(saved.title, saved.duration, saved.image, saved.src);
+  onVolChange(value: number) {
+    this.audio.volume = value;
   }
 
-  onVolChange(value?: number) {
-    this.audio.volume = value;
-    localStorage.setItem('track', JSON.stringify(this.selectedTrack));
-  }
-  pauseTrack() {
-    this.audio.pause();
+  toggleTrackState() {
+    if (this.audio.paused) {
+      this.audio.play();
+    } else {
+      this.audio.pause();
+    }
   }
 }

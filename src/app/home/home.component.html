@@ -4,7 +4,7 @@
 <hr>
 <hr>
 <div class="productGrid">
-  <div class="productBox" (click)="playTrack()" *ngFor="let track of tracks;let i = index">
+  <div class="productBox" *ngFor="let track of tracks;let i = index">
     <img src={{track.image}} class="productImage" (click)="selectTrack(i)" draggable="false">
     <h1 id="title" class="productTitle">{{track.title}}</h1>
     <p id="description" class="productDescription">{{track.description}}</p>
